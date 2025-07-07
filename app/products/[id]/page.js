@@ -23,12 +23,17 @@ export default function ProductDetails() {
       setProduct(found);
       setLoading(false);
     } else {
-      fetch(`https://fakestoreapi.com/products/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
+      (async () => {
+        try {
+          const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+          const data = await res.json();
           setProduct(data);
+        } catch (error) {
+          setProduct(null);
+        } finally {
           setLoading(false);
-        });
+        }
+      })();
     }
   }, [id, items]);
 

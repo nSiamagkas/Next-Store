@@ -4,11 +4,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import React, { useEffect, useState } from "react";
+import { useSearch } from "@/context/SearchContext";
 
 function GlassmorphNavbar() {
   const { cart } = useCart();
   const uniqueCount = cart.length;
 
+  const { search, setSearch } = useSearch();
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -27,9 +29,18 @@ function GlassmorphNavbar() {
           className="text-white hover:text-emerald-400 transition"
         />
       </Link>
-      <h1 className="text-4xl text-white drop-shadow-lg select-none">
-        The Next Store
-      </h1>
+      <div className="flex flex-col items-center gap-2">
+        <h1 className="text-4xl text-white drop-shadow-lg select-none">
+          The Next Store
+        </h1>
+        <input
+          type="text"
+          placeholder="Search"
+          className="w-xl bg-stone-700/80 backdrop-blur-md p-2 rounded-lg text-white"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <div className="flex items-center">
         <Link href="/cart" className="flex items-center relative">
           <ShoppingCartIcon

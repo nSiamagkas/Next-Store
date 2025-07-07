@@ -3,6 +3,7 @@ import GlassmorphNavbar from "@/components/Navbar";
 import { ItemsProvider } from "@/context/ItemsContext";
 import { CartProvider } from "@/context/CartContext";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
+import { SearchProvider } from "@/context/SearchContext";
 
 export const metadata = {
   title: "The Next Store",
@@ -13,14 +14,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ReactQueryProvider>
-          <ItemsProvider>
-            <CartProvider>
-              <GlassmorphNavbar />
-              {children}
-            </CartProvider>
-          </ItemsProvider>
-        </ReactQueryProvider>
+        <SearchProvider>
+          <ReactQueryProvider>
+            <ItemsProvider>
+              <CartProvider>
+                <GlassmorphNavbar />
+                {children}
+              </CartProvider>
+            </ItemsProvider>
+          </ReactQueryProvider>
+        </SearchProvider>
       </body>
     </html>
   );

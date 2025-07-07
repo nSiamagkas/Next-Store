@@ -8,12 +8,12 @@ export default function Home() {
   const { items, setItems } = useItems();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["products", "electronics"],
+    queryKey: ["products"],
     queryFn: async () => {
       const response = await fetch("https://fakestoreapi.com/products/");
       if (!response.ok) throw new Error("Network response was not ok");
-      const all = await response.json();
-      return all.filter((item) => item.category === "electronics");
+      const data = await response.json();
+      return data;
     },
   });
 
