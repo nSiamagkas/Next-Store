@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
@@ -15,7 +16,9 @@ export default function CartPage() {
     updateQuantity(id, Math.max(1, item.quantity + amount));
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const memoTotal = useMemo(() => {
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }, [cart]);
 
   return (
     <div className="max-w-3xl mx-auto mt-24 p-6 bg-stone-800 rounded-xl shadow-2xl">
@@ -86,7 +89,7 @@ export default function CartPage() {
       <div className="mt-8 flex justify-between items-center">
         <span className="text-xl text-white font-bold">Total:</span>
         <span className="text-2xl text-emerald-400 font-bold">
-          {total.toFixed(2)} €
+          {memoTotal.toFixed(2)} €
         </span>
       </div>
       <button

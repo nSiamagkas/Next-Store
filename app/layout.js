@@ -2,7 +2,7 @@ import "./globals.css";
 import GlassmorphNavbar from "@/components/Navbar";
 import { ItemsProvider } from "@/context/ItemsContext";
 import { CartProvider } from "@/context/CartContext";
-import ReactQueryProvider from "@/components/ReactQueryProvider";
+import ReactQueryProvider from "@/context/ReactQueryProvider";
 import { SearchProvider } from "@/context/SearchContext";
 
 export const metadata = {

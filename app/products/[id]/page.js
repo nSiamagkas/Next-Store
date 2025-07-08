@@ -6,10 +6,10 @@ import { useItems } from "@/context/ItemsContext";
 import { useCart } from "@/context/CartContext";
 
 export default function ProductDetails() {
+  const router = useRouter();
   const { id } = useParams();
   const { items } = useItems();
   const { addToCart } = useCart();
-  const router = useRouter();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);

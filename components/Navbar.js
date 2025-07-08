@@ -5,10 +5,14 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import React, { useEffect, useState } from "react";
 import { useSearch } from "@/context/SearchContext";
+import { usePathname } from "next/navigation";
 
 function GlassmorphNavbar() {
   const { cart } = useCart();
-  const uniqueCount = cart.length;
+  const uniqueCount = cart?.length || 0;
+  const pathname = usePathname();
+
+  const shouldShowSearch = pathname === "/";
 
   const { search, setSearch } = useSearch();
   const [theme, setTheme] = useState("light");
@@ -33,13 +37,15 @@ function GlassmorphNavbar() {
         <h1 className="text-4xl text-white drop-shadow-lg select-none">
           The Next Store
         </h1>
-        <input
-          type="text"
-          placeholder="Search"
-          className="w-xl bg-stone-700/80 backdrop-blur-md p-2 rounded-lg text-white"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        {shouldShowSearch && (
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-xl bg-stone-700/80 backdrop-blur-md p-2 rounded-lg text-white"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        )}
       </div>
       <div className="flex items-center">
         <Link href="/cart" className="flex items-center relative">

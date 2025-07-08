@@ -45,7 +45,7 @@ function Items({ items, loading, error }) {
     <div className="mt-25">
       <div className="flex flex-col items-center">
         <select
-          className="bg-stone-700 text-white p-2 rounded-lg mt-11 mb-3"
+          className="bg-stone-700 text-white p-2 rounded-lg mt-11 mb-3 hover:bg-stone-600 transition"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
